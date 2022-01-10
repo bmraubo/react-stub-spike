@@ -21,7 +21,7 @@ export default function App() {
     async function makeAPICall() {
         let url = `https://pokeapi.co/api/v2/pokemon/${pokeNumber}`;
         let response = await fetch(url);
-        let response_data = response.json()
+        let response_data = await response.json()
         setPokemon(response_data["name"])
     }
 
