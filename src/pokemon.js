@@ -12,13 +12,17 @@ export default function App() {
 
     function DisplayResult() {
         if (pokemon == null) {
-            return null;
+            let resultString = `Its unknown!`
+            return (
+                <h3 data-testid="Display">{resultString}</h3>
+            )
         } else {
             let resultString = `Its ${pokemon}`
             return (
                 <h3 data-testid="Display">{resultString}</h3>
             )
         }
+        
     }
 
     function handleClick() {
@@ -33,7 +37,8 @@ export default function App() {
         let url = `https://pokeapi.co/api/v2/pokemon/${pokeNumber}`;
         let response = await fetch(url);
         let response_data = await response.json()
-        setPokemon(response_data["name"])
+        console.log(response_data)
+        setPokemon(response_data["name"]);
     }
 
     useEffect(() => {
