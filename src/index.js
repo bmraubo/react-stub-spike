@@ -10,6 +10,17 @@ export default function App() {
         return <button onClick={()=>{handleClick()}}>{value}</button>
     }
 
+    function DisplayResult() {
+        if (pokemon == null) {
+            return null;
+        } else {
+            let resultString = `Its ${pokemon}`
+            return (
+                <h3>{resultString}</h3>
+            )
+        }
+    }
+
     function handleClick() {
         setPokeNumber(generateRandomNumber())
     }
@@ -27,13 +38,14 @@ export default function App() {
 
     useEffect(() => {
         makeAPICall()
-        document.title = `It is Number ${pokeNumber} - ${pokemon}`
+        document.title = `It is Number ${pokeNumber} - ${pokemon}!!!`
     })
 
     return (
         <div>
             <h3>What is in the tall grass?</h3>
             <Button value="What is it???"></Button>
+            <DisplayResult></DisplayResult>
         </div>
     )
 }
