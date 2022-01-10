@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { useState } from "react";
 
 export default function App() {
-    const [pokeNumber, setPokeNumber] = useState(1)
+    const [pokeNumber, setPokeNumber] = useState(null)
     const [pokemon, setPokemon] = useState(null)
 
     function Button({value}) {
@@ -37,7 +37,9 @@ export default function App() {
     }
 
     useEffect(() => {
-        makeAPICall()
+        if (pokeNumber != null) {
+            makeAPICall()
+        }
         document.title = `It is Number ${pokeNumber} - ${pokemon}!!!`
     })
 
