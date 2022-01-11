@@ -1,8 +1,7 @@
-import { fireEvent, render, screen } from "@testing-library/react"
+import { fireEvent, render, screen, waitFor } from "@testing-library/react"
 import '@testing-library/jest-dom';
 import React from "react";
 import App from "./pokemon"
-import { act } from 'react-dom/test-utils'
 
 describe('Testing frontend...', () => {
 
@@ -24,19 +23,19 @@ describe('Testing frontend...', () => {
                 json: () => Promise.resolve({"name": "Lazy Smurf"})
             })
         )
+
+        render(
+            <App />,
+            container
+        )
+        fireEvent.click(screen.getByText("What is it???"))
         
-        act(() => {
-            render(
-                <App />,
-                container
-            )
+        await waitFor(() => {
+            expect(fetch).toHaveBeenCalledTimes(1);
         })
 
-        await act(() => {
-            fireEvent.click(screen.getByText("What is it???"))
+        await waitFor(() => {
+            expect(screen.getByTestId("Display").textContent).toBe("Its Lazy Smurf")
         })
-        
-        expect(fetch).toHaveBeenCalledTimes(1);
-        expect(screen.getByTestId("Display").textContent).toBe("Its Lazy Smurf")
     })
 })
